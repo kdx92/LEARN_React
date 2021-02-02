@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+
+  // 模拟数据
+  const data1 = ['A', 'B' ,'C']
+  const data2 = [<li>A</li>, <li>B</li> ,<li>C</li>]
+  // const VDOM = (
+  //   <div>
+  //     <h1>hahaha</h1>
+  //     <ul>
+  //       {data2}
+  //     </ul>
+  //   </div>
+  // )
+  const VDOM = (
+    <div>
+      <h1>hahaha</h1>
+      <ul>
+        {
+          data1.map((item, id)=>{
+            return <li key={id}>{item}</li>
+          })
+        }
+     
+      </ul>
+    </div>
+  )
+   // key值不要用index，用id
+  // 渲染虚拟DOM到页面
+  ReactDOM.render(VDOM,document.getElementById('test'))
+
+  </script>
+</body>
+</html>

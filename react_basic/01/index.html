@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    const myId = 'aaa'
+    const myDate = 'BBB'
+  // 创建虚拟DOM
+  // const VDOM = (
+  //   <h1 id={myId.toUpperCase()}>
+  //     Hello, React
+  //   </h1>
+  // )
+  const VDOM = (
+    <h1 id={myId.toUpperCase()}>
+    <span>{myDate.toLowerCase()}</span>
+    </h1>
+  )
+
+  // 渲染虚拟DOM到页面
+  ReactDOM.render(VDOM,document.getElementById('test'))
+  // jsx语法规则、
+  // 1.定义虚拟DOM时，不要写引号
+  // 2.标签中有JS表达式时要用{}
+  </script>
+</body>
+</html>
