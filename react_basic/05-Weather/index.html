@@ -19,11 +19,25 @@
     constructor(props) {
       super(props)
       this.state = {isHot:false}
+      this.changeWeather = this.changeWeather.bind(this)
+    
     }
     render() {
+      // 读取状态
       console.log(this);
       const {isHot} = this.state
-      return <h2>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
+      return <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
+    }
+    changeWeather() {
+
+      // 获取原来的isHot值
+      const isHot = this.state.isHot
+      // state必须通过setState进行更新
+      this.setState({isHot:!isHot})
+      console.log(this);
+
+      // state不可直接更改，下面错误
+      // this.state.isHot = !isHot 错误
     }
   }
   
@@ -31,6 +45,19 @@
   ReactDOM.render(<Weather/>,document.getElementById('test'))
 
   </script>
+<!-- this.state = {isHot:false} -->
+<!-- 初始化状态 -->
 
+<!-- this.changeWeather = this.changeWeather.bind(this) -->
+<!-- 解决changeWeather中this指向问题 -->
+
+<!-- return <h2>今天天气很{isHot ? '炎热' : '凉爽'}</h2> -->
+<!-- 读取状态 -->
+
+<!-- 在点击事件的回调中，对isHot取法 -->
+
+<!-- changeWeather放在weather的原型对象上，供实例使用 -->
+<!-- 由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用 -->
+<!-- 类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined -->
 </body>
 </html>
