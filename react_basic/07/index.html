@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+  // 创建组件
+  class Person extends React.Component{
+    render(){
+      console.log(this);
+      const {name,age,gender} = this.props
+      return (
+        <ul>
+          <li>姓名：{name}</li>
+          <li>性别：{gender}</li>
+          <li>年龄：{age}</li>
+        </ul>
+      )
+    }
+  }
+    
+  // 渲染虚拟DOM到页面
+  ReactDOM.render(<Person name="a" age="17" gender="女" />,document.getElementById('test1'))
+  ReactDOM.render(<Person name="b" age="19" gender="男" />,document.getElementById('test2'))
+
+  </script>
+</body>
+</html>

@@ -16,18 +16,21 @@
   <script type="text/babel">
   // 创建类式组件
   class Weather extends React.Component {
+    // 构造器调用了1次，因为Reactnew了一个实例，即一个<Weather/>
     constructor(props) {
       super(props)
       this.state = {isHot:false}
       this.changeWeather = this.changeWeather.bind(this)
     
     }
+    // render调用1+n次，1是初始化的那次，n是状态更新的次数
     render() {
       // 读取状态
       console.log(this);
       const {isHot} = this.state
       return <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
     }
+    // changeWeather点击几次调用几次
     changeWeather() {
 
       // 获取原来的isHot值
