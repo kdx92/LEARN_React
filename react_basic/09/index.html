@@ -20,6 +20,20 @@
   <script type="text/babel">
   // 创建组件
   class Person extends React.Component{
+    // 对标签属性进行类型、必要性的限制
+    static propTypes = {
+      name:PropTypes.string.isRequired, 
+      //限制name必传，且为String
+      gender:PropTypes.string,
+      age:PropTypes.number,
+      speak:PropTypes.func,
+      // 限制speak为函数
+    }
+  // 指定默认标签属性值
+    static defaultProps = {
+      gender:'没说',
+      age:0
+    }
     render(){
       console.log(this);
       const {name,age,gender} = this.props
@@ -34,21 +48,7 @@
       )
     }
   }
-  // 对标签属性进行类型、必要性的限制
-  Person.propTypes = {
-    name:PropTypes.string.isRequired, 
-    //限制name必传，且为String
-    gender:PropTypes.string,
-    age:PropTypes.number,
-    speak:PropTypes.func,
-    // 限制speak为函数
-  }
-  // 指定默认标签属性值
-  Person.defaultProps = {
-    gender:'没说',
-    age:0
-  }
-  // 不能是00欸
+
 
   // 渲染虚拟DOM到页面
   // ReactDOM.render(<Person name="a" age="17" gender="女" />,document.getElementById('test1'))
