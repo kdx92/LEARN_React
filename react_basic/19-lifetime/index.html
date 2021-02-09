@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <!-- 对组件标签属性进行限制 -->
+  <script src="../js/prop-types.js"></script>
+
+  <script type="text/babel">
+
+  // 创建组件
+  class Life extends React.Component{
+    state = {opacity:1}
+
+    death = ()=>{
+      // 卸载组件
+      ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+    }
+
+    // 组件挂载完毕
+    componentDidMount(){
+      this.timer = setInterval(() => {
+        // 获取原状态
+        let {opacity} = this.state
+        // 减少0.1
+        opacity -= 0.1
+        if(opacity <= 0) {
+          opacity = 1
+        }
+        // 设置新的透明度
+        this.setState({opacity})
+      }, 200);
+    }
+
+    // 组件将要卸载
+    componentWillUnmount(){
+      // 清除定时器
+      clearInterval(this.timer)
+    }
+    
+    // 初始化渲染/状态更新后
+    render(){
+      return (
+        <div>
+          <h2 style={{opacity:this.state.opacity}}>锵锵锵锵锵锵锵</h2>
+          <button onClick={this.death}>小点点</button>
+        </div>
+      )
+    }
+  }
+  ReactDOM.render(<Life/>,document.getElementById('test'))
+  </script>
+<!-- 页面中的输入类DOM,随着输入，将数据维护到状态中，需要使用时，从状态中取出来——受控组件 -->
+<!-- 受控组件中不用写ref，而非受控组件有几个输入项就要写几个ref -->
+
+</body>
+</html>
