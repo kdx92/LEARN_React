@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/17/react.development.js"></script>
+  <script src="../js/17/react-dom.development.js"></script>
+  <script src="../js/17/babel.min.js"></script>
+  <script src="../js/17/prop-types.js"></script>
+  <script type="text/babel">
+
+  class A extends React.Component{
+
+    // 初始化状态
+    state = {carName: 'a'}
+
+    changeCar = ()=>{
+      this.setState({carName: 'b'})
+    }
+
+    render(){
+      return (
+        <div>
+          <div>A</div>
+          <button onClick={this.changeCar}>change</button>
+          <B carName={this.state.carName}/>
+        </div>
+      )
+
+    }
+  }
+
+  class B extends React.Component{
+    // 组件将要接收新的props的钩子
+    componentWillReceiveProps(props){
+      console.log('ssssss', props)
+    }
+    // 第一次不会调，点击按钮后会调用
+    render(){
+      return (
+        <div>B车：{this.props.carName}</div>
+      )
+    }
+  }
+  ReactDOM.render(<A/>,document.getElementById('test'))
+  </script>
+</body>
+</html>
