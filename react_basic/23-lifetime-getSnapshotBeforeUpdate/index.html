@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .list {
+      width: 200px;
+      height: 150px;
+      background-color: skyblue;
+      overflow: auto;
+    }
+
+    .news {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <!-- 对组件标签属性进行限制 -->
+  <script src="../js/prop-types.js"></script>
+
+  <script type="text/babel">
+
+  // 创建组件
+  class NewsList extends React.Component{
+    state = {newsArr:[]}
+
+    componentDidMount() {
+      setInterval(() => {
+        // 获取原状态
+        const {newsArr} = this.state
+        // 模拟一条新闻
+        const news = '新闻' + (newsArr.length + 1)
+        // 更新状态
+        this.setState({newsArr:[news,...newsArr]})
+      }, 1000);
+    }
+
+    getSnapshotBeforeUpdate() {
+      return this.refs.list.scrollHeight
+    }
+
+    componentDidUpdate(preProps, preState, height) {
+      this.refs.list.scrollTop += this.refs.list.scrollHeight - height
+    }
+    render(){
+      const {count} = this.state
+      return (
+          <div className="list" ref="list">
+           {
+             this.state.newsArr.map((n, id) => {
+               return <div key={id} className="news">{n}</div>
+             })
+           }
+            
+          </div>
+      )
+    }
+  }
+  ReactDOM.render(<NewsList/>,document.getElementById('test'))
+  </script>
+<!-- 页面中的输入类DOM,随着输入，将数据维护到状态中，需要使用时，从状态中取出来——受控组件 -->
+<!-- 受控组件中不用写ref，而非受控组件有几个输入项就要写几个ref -->
+
+</body>
+</html>
