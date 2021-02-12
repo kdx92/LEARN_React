@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+
+  // 创建组件
+  class Time extends React.Component{
+    state = {date: new Date()}
+
+    componentDidMount () {
+      setInterval(() => {
+        this.setState({
+          date: new Date()
+        })
+      }, 1000)
+    }
+    render(){
+      return (
+          <div>
+            <input type="text" />
+            <span>{this.state.date.toTimeString()}</span>
+          </div>
+      )
+    }
+  }
+  ReactDOM.render(<Time/>,document.getElementById('test'))
+  </script>
+<!--时间更新，重新调render，input不变，没有更新
+  整个span标签更新，diff算法最小的力度是标签 -->
+
+  <!-- span中嵌套input，input不会更新，不会重新生成，重新放置 -->
+
+
+</body>
+</html>
