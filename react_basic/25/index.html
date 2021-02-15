@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 -->
+  <div id="test"></div>
+
+  <script src="../js/react.development.js"></script>
+  <script src="../js/react-dom.development.js"></script>
+  <script src="../js/babel.min.js"></script>
+  <script src="../js/prop-types.js"></script>
+  <script type="text/babel">
+
+  // 创建组件
+  class Person extends React.Component{
+    state = {
+      persons: [
+        {id: 1, name: 'a', age: 16},
+        {id: 2, name: 'b', age: 19},
+
+      ]
+    }
+
+    add = () => {
+      const {persons} = this.state
+      const p = {id: persons.length+1, name: 'c', age: 33}
+      this.setState({persons: [p,...persons]})
+    }
+
+    render(){
+      return (
+        <div>
+          <button onClick={this.add}>添加</button>
+          <ul>
+          {
+            this.state.persons.map((personObj, index) => {
+              return <li key={index}>{personObj.name}---{personObj.age}</li>
+            })
+          }
+        </ul>
+        </div>
+        
+      )
+    }
+  }
+  ReactDOM.render(<Person/>,document.getElementById('test'))
+  </script>
+</body>
+</html>
