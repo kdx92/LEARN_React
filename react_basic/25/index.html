@@ -28,7 +28,8 @@
     add = () => {
       const {persons} = this.state
       const p = {id: persons.length+1, name: 'c', age: 33}
-      this.setState({persons: [p,...persons]})
+      this.setState({persons: [...persons,p]})
+      // this.setState({persons: [p,...persons]})
     }
 
     render(){
@@ -38,10 +39,20 @@
           <ul>
           {
             this.state.persons.map((personObj, index) => {
-              return <li key={index}>{personObj.name}---{personObj.age}</li>
+              return <li key={index}>{personObj.name}---{personObj.age}<input type="text"/></li>
             })
           }
         </ul>
+        <hr/>
+        <hr/>
+        <ul>
+          {
+            this.state.persons.map((personObj) => {
+              return <li key={personObj.id}>{personObj.name}---{personObj.age}<input type="text"/></li>
+            })
+          }
+        </ul>
+
         </div>
         
       )
